@@ -1,0 +1,44 @@
+.custom-title {
+  flex: 1; /* Faz o título ocupar o espaço restante */
+  text-align: center; /* Centraliza o texto */
+}
+
+.custom-button {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+ion-content.white-background {
+  background-color: white !important;
+}
+
+.form-item {
+  margin-bottom: 16px;
+}
+
+ion-item {
+  --background: transparent; /* Para garantir que o fundo padrão não interfira */
+
+  ion-input {
+    background-color: var(--ion-color-input-background-light);
+
+    &.ion-color-dark {
+      background-color: var(--ion-color-input-background-dark);
+    }
+  }
+}
+
+ion-input,
+ion-select,
+.form-item {
+  margin-top: 10px;
+  padding-left: 10px !important;
+}
+
+.custom-save-button {
+  width: 95% !important; /* Define a largura para 50% */
+  padding-top: auto;
+  margin: 0 auto; /* Centraliza o botão */
+  display: flex; /* Alinha o conteúdo */
+  justify-content: center; /* Centraliza o conteúdo dentro do botão */
+}

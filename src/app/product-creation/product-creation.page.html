@@ -1,0 +1,96 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <!-- Botão de Voltar -->
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/"
+        icon="chevron-back-outline"
+      ></ion-back-button>
+    </ion-buttons>
+
+    <!-- Título centralizado -->
+    <ion-title class="custom-title">Product Creation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="white-background black-text">
+  <ion-list>
+    <!-- Name -->
+    <ion-item class="form-item">
+      <ion-label position="stacked">Name</ion-label>
+      <ion-input
+        type="text"
+        [(ngModel)]="product.name"
+        placeholder="Apple iPhone 14"
+      ></ion-input>
+    </ion-item>
+
+    <!-- Quantity -->
+    <ion-item class="form-item">
+      <ion-label position="stacked">Quantity</ion-label>
+      <ion-input
+        type="number"
+        [(ngModel)]="product.quantity"
+        placeholder="50"
+      ></ion-input>
+    </ion-item>
+
+    <!-- Type -->
+    <ion-item class="form-item">
+      <ion-label position="stacked">Type</ion-label>
+      <ion-select [(ngModel)]="product.type" placeholder="Electronics">
+        <ion-select-option value="electronics">Electronics</ion-select-option>
+        <ion-select-option value="furniture">Furniture</ion-select-option>
+        <ion-select-option value="clothing">Clothing</ion-select-option>
+        <ion-select-option value="food">Food</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Purchase Price -->
+    <ion-item class="form-item">
+      <ion-label position="stacked">Purchase Price</ion-label>
+      <ion-input
+        type="number"
+        [(ngModel)]="product.purchasePrice"
+        placeholder="$799"
+      ></ion-input>
+    </ion-item>
+
+    <!-- Sale Price -->
+    <ion-item class="form-item">
+      <ion-label position="stacked">Sale Price</ion-label>
+      <ion-input
+        type="number"
+        [(ngModel)]="product.salePrice"
+        placeholder="$999"
+      ></ion-input>
+    </ion-item>
+
+    <!-- Location -->
+    <ion-item class="form-item">
+      <ion-label position="stacked">Location</ion-label>
+      <ion-input
+        type="text"
+        [(ngModel)]="product.location"
+        placeholder="Deposit"
+      ></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <!-- Save Button -->
+ 
+  <ion-footer>
+    <ion-button
+      color="primary"
+      (click)="saveProduct()"
+      class="custom-save-button"
+    >
+      <ion-icon
+        slot="start"
+        name="save-outline"
+        class="custom-button"
+      ></ion-icon>
+      Save
+    </ion-button>
+  </ion-footer>
+</ion-content>
