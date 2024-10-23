@@ -14,6 +14,11 @@ const routes: Routes = [
         (m) => m.ProductCreationPageModule
       ),
   },
+  {
+    path: 'perfil',
+    loadChildren: () =>
+      import('./perfil/perfil.module').then((m) => m.PerfilPageModule),
+  },
 ];
 
 @NgModule({

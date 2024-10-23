@@ -6,7 +6,7 @@
         icon="chevron-back-outline"
       ></ion-back-button>
     </ion-buttons>
-    <ion-title class="custom-title">Product Creation</ion-title>
+    <ion-title class="custom-title">Criar Produto</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -23,7 +23,7 @@
         ></ion-input>
       </ion-item>
       <ion-note *ngIf="isFieldInvalid('name')" color="danger">
-        Name is required.
+        Nome é obrigatorio.
       </ion-note>
 
       <!-- Quantity -->
@@ -36,7 +36,7 @@
         ></ion-input>
       </ion-item>
       <ion-note *ngIf="isFieldInvalid('quantity')" color="danger">
-        Quantity is required and must be a positive number.
+        Quantidade tem que ser maior que 0.
       </ion-note>
 
       <!-- Type -->
@@ -54,7 +54,7 @@
         </ion-select>
       </ion-item>
       <ion-note *ngIf="isFieldInvalid('type')" color="danger">
-        Type is required.
+        Tipo é obrigatorio.
       </ion-note>
 
       <!-- Purchase Price -->
@@ -67,7 +67,7 @@
         ></ion-input>
       </ion-item>
       <ion-note *ngIf="isFieldInvalid('buy_price')" color="danger">
-        Purchase price is required and must be a positive number.
+        Preço de compra e obrigatorio e maior que 0.
       </ion-note>
 
       <!-- Sale Price -->
@@ -83,7 +83,7 @@
         ></ion-input>
       </ion-item>
       <ion-note *ngIf="isSellPriceInvalid()" color="danger">
-        Sale price must be greater than purchase price.
+        Preço de venda tem que ser maior que o de compra.
       </ion-note>
 
       <!-- Location -->
@@ -99,7 +99,7 @@
         ></ion-input>
       </ion-item>
       <ion-note *ngIf="isFieldInvalid('where_stored')" color="danger">
-        Location is required.
+        Localização é obrigatoria.
       </ion-note>
     </ion-list>
 

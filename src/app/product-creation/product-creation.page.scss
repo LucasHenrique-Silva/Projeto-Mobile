@@ -42,3 +42,28 @@ ion-select,
   display: flex; /* Alinha o conteúdo */
   justify-content: center; /* Centraliza o conteúdo dentro do botão */
 }
+
+.form-item {
+  margin-bottom: 16px; /* Espaço entre os itens */
+}
+
+ion-input {
+  --padding-start: 10px; /* Adiciona preenchimento ao início */
+  --border-radius: 8px; /* Bordas arredondadas */
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+ion-item.invalid {
+  --background: #f2a2a2; /* Fundo vermelho claro para indicar erro */
+}
+
+.custom-save-button {
+  background-color: #3880ff; /* Cor de fundo */
+  color: white; /* Cor do texto */
+  border-radius: 8px; /* Bordas arredondadas */
+  transition: background-color 0.3s; /* Transição suave */
+}
+
+.custom-save-button:hover {
+  background-color: #014b99; /* Cor ao passar o mouse */
+}

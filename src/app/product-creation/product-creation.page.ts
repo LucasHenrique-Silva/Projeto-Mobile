@@ -34,8 +34,8 @@ export class ProductCreationPage {
         name: ['', Validators.required],
         quantity: ['', [Validators.required, Validators.min(1)]],
         type: ['', Validators.required],
-        buy_price: ['', [Validators.required, Validators.min(0)]],
-        sell_price: ['', [Validators.required, Validators.min(0)]],
+        buy_price: ['', [Validators.required, Validators.min(0.01)]],
+        sell_price: ['', [Validators.required, Validators.min(0.01)]],
         where_stored: ['', Validators.required],
       },
       { validators: this.priceValidator }
