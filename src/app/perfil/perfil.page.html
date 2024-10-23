@@ -1,6 +1,12 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Perfil</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref=""
+        icon="chevron-back-outline"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title class="custom-title">perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -65,10 +71,10 @@
     </ion-modal>
 
     <!-- Botão para salvar o perfil -->
-    <ion-footer>
+    <!-- <ion-footer>
       <ion-button expand="full" type="submit" [disabled]="profileForm.invalid">
         Save Profile
       </ion-button>
-    </ion-footer>
+    </ion-footer> -->
   </form>
 </ion-content>

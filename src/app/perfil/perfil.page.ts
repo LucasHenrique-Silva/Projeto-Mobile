@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-perfil',
@@ -8,20 +10,19 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage {
-  name: string = 'John Smith';
-  email: string = 'john.smith@example.com';
-  dateOfBirth: string = '1990-05-15';
+  name: string = '';
+  email: string = '';
+  dateOfBirth: string = '';
   isModalOpen: boolean = false;
-  selectedDate: string = this.dateOfBirth;
-  isEmailValid: boolean = true;
-  isNameValid: boolean = true;
-  minDate: string;
-  maxDate: string;
   profileForm: FormGroup;
+  minDate: string; // Adicione estas linhas
+  maxDate: string; // Adicione estas linhas
 
   constructor(
     private formBuilder: FormBuilder,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private storage: Storage,
+    private http: HttpClient
   ) {
     const currentDate = new Date();
     this.minDate = new Date(
@@ -38,6 +39,8 @@ export class PerfilPage {
     )
       .toISOString()
       .split('T')[0];
+
+    this.initStorage();
     this.profileForm = this.formBuilder.group({
       name: [
         '',
@@ -48,12 +51,48 @@ export class PerfilPage {
     });
   }
 
-  // Método para salvar o perfil
+  async initStorage() {
+    await this.storage.create(); // Inicializa o armazenamento
+    this.loadUserProfile();
+  }
+
+  async loadUserProfile() {
+    const storedEmail = await this.storage.get('email');
+    if (storedEmail) {
+      try {
+        const response = await this.http
+          .get<any>(
+            `https://projeto-mobile-api.vercel.app/api/v1/findEmail/User/${storedEmail}`
+          )
+          .toPromise();
+
+        if (response) {
+          // Preencher o formulário com os dados do usuário
+          this.profileForm.patchValue({
+            name: response.name,
+            email: response.email,
+            dateOfBirth: response.born_date
+              ? response.born_date.split('T')[0]
+              : '', // Converte para ISO
+          });
+
+          // Atualiza a variável de data de nascimento para o valor do formulário
+          this.dateOfBirth = response.born_date
+            ? response.born_date.split('T')[0]
+            : '';
+        }
+      } catch (error) {
+        console.error('Erro ao buscar os dados do usuário:', error);
+      }
+    }
+  }
+
   async saveProfile() {
     if (this.profileForm.invalid) {
       return;
     }
     // Adicione aqui a lógica para salvar o perfil
+    console.log('Perfil salvo:', this.profileForm.value);
   }
 
   openDatePicker() {

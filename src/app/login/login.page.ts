@@ -37,11 +37,18 @@ export class LoginPage {
         )
         .toPromise();
 
+      console.log('Resposta da API:', response); // Inspecione a resposta da API
+
       if (response && response.token) {
-        // Armazena o token no Storage
-        await this.storage.set('token', response.token);
-        console.log('Login bem-sucedido');
-        this.router.navigate(['/home']);
+        // Verifica se a propriedade userExists existe
+        if (response.userExists && response.userExists.email) {
+          await this.storage.set('token', response.token);
+          await this.storage.set('email', response.userExists.email);
+          console.log('Login bem-sucedido');
+          this.router.navigate(['/home']);
+        } else {
+          console.log('Usuário ou email não encontrado na resposta.');
+        }
       } else {
         console.log('Token não recebido na resposta.');
       }

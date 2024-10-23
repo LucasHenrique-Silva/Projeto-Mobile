@@ -1,10 +1,7 @@
 <ion-content>
   <div class="container">
-    <!-- Cabeçalho com o nome do sistema -->
-
     <h2 style="margin-bottom: 10px">Sistema de inventário</h2>
 
-    <!-- Botão de adicionar produto -->
     <ion-button expand="full" (click)="addProduct()" color="primary">
       <ion-icon slot="start" name="add-circle-outline"></ion-icon>
       Add Product
@@ -22,8 +19,7 @@
         <ion-label>
           <h3>{{ product.name }}</h3>
           <p>
-            SKU: {{ product.sku }}, Quantity: {{ product.quantity }}, Category:
-            {{ product.category }}
+            Quantity: {{ product.quantity }}, Category: {{ product.category }}
           </p>
         </ion-label>
       </ion-item>
@@ -37,12 +33,29 @@
         lines="none"
         class="employee-item"
       >
-        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-icon [name]="employee.icon" slot="start"></ion-icon>
         <ion-label>
           <h3>{{ employee.name }}</h3>
-          <p>Employee ID: {{ employee.id }}, Role: {{ employee.position }}</p>
+          <p>Email: {{ employee.email }}, Role: {{ employee.position }}</p>
         </ion-label>
       </ion-item>
     </ion-list>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="full" (click)="goToProfile()" color="secondary">
+            <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+            Profile
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button expand="full" (click)="someAction2()" color="secondary">
+            <ion-icon slot="start" name="settings-outline"></ion-icon>
+            Deslogar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>

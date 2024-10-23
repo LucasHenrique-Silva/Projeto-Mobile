@@ -1,7 +1,7 @@
 // auth-response.model.ts
 export interface AuthResponse {
   token: string;
-  user: {
+  userExists?: {
     id: string;
     email: string;
     name: string;
