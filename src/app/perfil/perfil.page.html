@@ -5,43 +5,21 @@
 </ion-header>
 
 <ion-content>
-  <!-- Campo para o nome com validação automática -->
-    <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
-    <ion-item
-      [class.invalid]="profileForm.get('name')?.invalid && profileForm.get('name')?.touched"
-    >
+  <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+    <!-- Campo para o nome com validação automática -->
+    <ion-item [class.invalid]="isFieldInvalid('name')">
       <ion-label position="floating">Name</ion-label>
       <ion-input formControlName="name"></ion-input>
-      <ion-note
-        slot="error"
-        *ngIf="profileForm.get('name')?.errors?.['required'] && profileForm.get('name')?.touched"
-      >
-        Name is required.
-      </ion-note>
-      <ion-note
-        slot="error"
-        *ngIf="profileForm.get('name')?.errors?.['pattern'] && profileForm.get('name')?.touched"
-      >
-        Name must be at least 3 characters long and cannot contain numbers or special characters.
+      <ion-note slot="error" *ngIf="isFieldInvalid('name')">
+        Name is required and must be at least 3 characters long.
       </ion-note>
     </ion-item>
 
     <!-- Campo para o email com validação automática -->
-    <ion-item
-      [class.invalid]="profileForm.get('email')?.invalid && profileForm.get('email')?.touched"
-    >
+    <ion-item [class.invalid]="isFieldInvalid('email')">
       <ion-label position="floating">Email</ion-label>
       <ion-input formControlName="email" type="email"></ion-input>
-      <ion-note
-        slot="error"
-        *ngIf="profileForm.get('email')?.errors?.['required'] && profileForm.get('email')?.touched"
-      >
-        Email is required.
-      </ion-note>
-      <ion-note
-        slot="error"
-        *ngIf="profileForm.get('email')?.errors?.['email'] && profileForm.get('email')?.touched"
-      >
+      <ion-note slot="error" *ngIf="isFieldInvalid('email')">
         Please enter a valid email address.
       </ion-note>
     </ion-item>
@@ -55,10 +33,7 @@
         readonly
       >
       </ion-input>
-      <ion-note
-        slot="error"
-        *ngIf="profileForm.get('dateOfBirth')?.errors?.['required'] && profileForm.get('dateOfBirth')?.touched"
-      >
+      <ion-note slot="error" *ngIf="isFieldInvalid('dateOfBirth')">
         Date of birth is required.
       </ion-note>
     </ion-item>

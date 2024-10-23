@@ -1,0 +1,39 @@
+ion-content {
+  --background: transparent; /* Define o fundo da página como branco */
+}
+
+.container {
+  padding: 16px;
+  background: transparent; /* Fundo branco para o contêiner */
+}
+
+.product-item,
+.employee-item {
+  --background: transparent; /* Fundo branco para os itens */
+  --border-radius: 8px;
+  margin: 8px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+ion-icon {
+  font-size: 24px;
+  color: #3880ff;
+}
+
+ion-avatar img {
+  border-radius: 50%;
+}
+
+.black-background {
+  background-color: #ffffff !important; /* Sobrescreve fundo preto */
+}
+
+/* Adicionando estilos para garantir que os campos não fiquem com fundo preto */
+ion-item {
+  --background: transparent; /* Fundo branco para os itens */
+}
+
+ion-list {
+  --background: transparent; /* Fundo branco para a lista */
+}

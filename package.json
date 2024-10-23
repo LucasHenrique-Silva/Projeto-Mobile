@@ -27,6 +27,7 @@
     "@capacitor/android": "^6.1.2",
     "@capacitor/core": "6.1.2",
     "@ionic/angular": "^8.0.0",
+    "@ionic/storage-angular": "^4.0.0",
     "cordova-android": "13.0.0",
     "ionicons": "^7.0.0",
     "ngx-currency": "^18.0.0",

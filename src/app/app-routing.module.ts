@@ -4,8 +4,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'product-creation',
+    redirectTo: 'login', // Redireciona para a página de login
     pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginPageModule),
   },
   {
     path: 'product-creation',
@@ -18,6 +23,11 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () =>
       import('./perfil/perfil.module').then((m) => m.PerfilPageModule),
+  },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./home/home.module').then((m) => m.HomePageModule),
   },
 ];
 

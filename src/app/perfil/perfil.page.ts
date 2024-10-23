@@ -69,4 +69,9 @@ export class PerfilPage {
     this.profileForm.patchValue({ dateOfBirth: this.dateOfBirth }); // Atualiza o formulário com a nova data
     this.isModalOpen = false; // Fecha o modal
   }
+
+  isFieldInvalid(field: string): boolean {
+    const control = this.profileForm.get(field);
+    return !!(control && control.invalid && control.touched);
+  }
 }
