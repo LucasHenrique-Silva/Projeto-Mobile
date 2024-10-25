@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -22,6 +23,7 @@ export class PerfilPage {
     private formBuilder: FormBuilder,
     private alertController: AlertController,
     private storage: Storage,
+    private router: Router,
     private http: HttpClient
   ) {
     const currentDate = new Date();
@@ -136,7 +138,15 @@ export class PerfilPage {
         const alert = await this.alertController.create({
           header: 'Sucesso',
           message: 'Perfil atualizado com sucesso!',
-          buttons: ['OK'],
+          buttons: [
+            {
+              text: 'OK',
+              handler: () => {
+                // Redireciona para a home ao clicar em OK
+                this.router.navigate(['/home']); // Substitua '/home' pela rota da sua página inicial
+              },
+            },
+          ],
         });
         await alert.present();
       }

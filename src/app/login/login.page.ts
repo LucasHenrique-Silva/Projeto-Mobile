@@ -44,7 +44,12 @@ export class LoginPage {
         if (response.userExists && response.userExists.email) {
           await this.storage.set('token', response.token);
           await this.storage.set('email', response.userExists.email);
+          await this.storage.set('userRole', response.userExists.role);
           console.log('Login bem-sucedido');
+          console.log(
+            'Role armazenada no storage:',
+            await this.storage.get('userRole')
+          );
           this.router.navigate(['/home']);
         } else {
           console.log('Usuário ou email não encontrado na resposta.');

@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { ProductService } from './product.service';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-creation',
@@ -25,6 +26,7 @@ export class ProductCreationPage {
 
   constructor(
     private formBuilder: FormBuilder,
+    private router: Router,
     private productService: ProductService,
     private alertController: AlertController,
     private loadingController: LoadingController
@@ -63,11 +65,12 @@ export class ProductCreationPage {
     this.productService.createProduct(this.productForm.value).subscribe(
       async (response) => {
         await loading.dismiss();
-        this.showAlert('Success', 'Product created successfully!');
+        // Exibe o alerta de sucesso
+        await this.showAlert('Success', 'Product created successfully!');
       },
       async (error) => {
         await loading.dismiss();
-        this.showAlert('Error', 'Failed to create product.');
+        await this.showAlert('Error', 'Failed to create product.');
       }
     );
   }
@@ -76,7 +79,15 @@ export class ProductCreationPage {
     const alert = await this.alertController.create({
       header,
       message,
-      buttons: ['OK'],
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            // Redireciona para a home apenas após o clique em "OK"
+            this.router.navigate(['/home']); // Substitua '/home' pela rota da sua página inicial
+          },
+        },
+      ],
     });
     await alert.present();
   }

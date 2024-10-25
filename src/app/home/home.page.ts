@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-home',
@@ -16,22 +17,31 @@ export class HomePage {
   itemsPerPage: number = 5;
   isInfiniteScrollDisabled: boolean = false;
   isLoading: boolean = false;
-  hasMoreProducts: boolean = false; // Controle de mais produtos
-  autoRefreshInterval: any; // Para armazenar o ID do intervalo de atualização
+  hasMoreProducts: boolean = false;
+  autoRefreshInterval: any;
+  loggedInUserRole: string | null = null; // Armazenar o role do usuário logado
 
   constructor(
     private router: Router,
     private http: HttpClient,
+    private storage: Storage,
     private loadingController: LoadingController
   ) {}
 
   ionViewWillEnter() {
+    this.getLoggedInUserRole(); // Obtém o role do usuário logado
     this.refreshData();
     this.startAutoRefresh();
   }
 
   ionViewWillLeave() {
     this.stopAutoRefresh();
+  }
+
+  // Obtém o role do usuário logado do localStorage (ou de onde está armazenado)
+  async getLoggedInUserRole() {
+    this.loggedInUserRole = await this.storage.get('userRole');
+    console.log('Role recuperada:', this.loggedInUserRole); // Verificação de log
   }
 
   refreshData() {
@@ -62,7 +72,6 @@ export class HomePage {
 
         this.products = [...this.products, ...newProducts];
 
-        // Verifique se há mais produtos para carregar
         this.hasMoreProducts = newProducts.length === this.itemsPerPage;
 
         if (newProducts.length < this.itemsPerPage) {
@@ -103,14 +112,13 @@ export class HomePage {
             this.employees = response.data.map((user: any) => ({
               name: user.name || 'No Name',
               position: user.role,
-              email: user.email,
+              email: user.email, // O email ainda é carregado, mas será exibido apenas para admin
               icon: this.getIconForEmployee(user.role),
             }));
           } else {
             console.error('Formato inesperado na resposta da API');
             this.employees = [];
           }
-          console.log('API response:', response); // Para verificar se os dados estão corretos
         },
         (error) => {
           console.error('Erro ao carregar funcionários:', error);
@@ -159,6 +167,7 @@ export class HomePage {
   someAction2() {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
+    localStorage.removeItem('role');
     this.router.navigate(['/login']);
     console.log('Ação 2 executada: usuário deslogado.');
   }

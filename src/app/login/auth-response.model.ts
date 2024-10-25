@@ -5,6 +5,7 @@ export interface AuthResponse {
     id: string;
     email: string;
     name: string;
+    role: string;
     // Adicione outros campos conforme necessário
   };
 }

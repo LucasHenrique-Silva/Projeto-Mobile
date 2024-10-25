@@ -42,6 +42,7 @@
     </ion-list>
 
     <!-- Seção de funcionários -->
+    <!-- Seção de funcionários -->
     <h2>Employees</h2>
     <ion-list>
       <ion-item
@@ -52,7 +53,11 @@
         <ion-icon [name]="employee.icon" slot="start"></ion-icon>
         <ion-label>
           <h3>{{ employee.name }}</h3>
-          <p>Email: {{ employee.email }}, Role: {{ employee.position }}</p>
+          <!-- Exibir email apenas se o usuário logado for admin -->
+          <p *ngIf="loggedInUserRole === 'admin'">
+            Email: {{ employee.email }}
+          </p>
+          <p>Role: {{ employee.position }}</p>
         </ion-label>
       </ion-item>
     </ion-list>
