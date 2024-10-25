@@ -6,14 +6,15 @@ ion-content {
   padding: 16px;
   background: transparent; /* Fundo branco para o contêiner */
 }
-
+.no-bottom-spacing {
+  margin-bottom: 0; // Remove o espaçamento inferior
+}
 .product-item,
 .employee-item {
   --background: transparent; /* Fundo branco para os itens */
   --border-radius: 8px;
   margin: 8px 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
 }
 
 ion-icon {
@@ -36,4 +37,20 @@ ion-item {
 
 ion-list {
   --background: transparent; /* Fundo branco para a lista */
+}
+
+.show-more-button {
+  background-color: #4caf50; /* Cor de fundo verde */
+  color: white; /* Cor do texto */
+  font-weight: bold; /* Texto em negrito */
+  border-radius: 8px; /* Bordas arredondadas */
+  transition: background-color 0.3s; /* Transição suave para hover */
+}
+
+.show-more-button:hover {
+  background-color: #45a049; /* Cor do fundo ao passar o mouse */
+}
+
+.show-more-item {
+  margin: 10px 0; /* Espaço em volta do item */
 }

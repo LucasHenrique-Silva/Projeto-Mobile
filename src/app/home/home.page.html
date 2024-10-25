@@ -9,7 +9,7 @@
 
     <!-- Seção de produtos -->
     <h2>Products</h2>
-    <ion-list>
+    <ion-list style="max-height: 220px; overflow-y: auto">
       <ion-item
         *ngFor="let product of products"
         lines="none"
@@ -22,6 +22,22 @@
             Quantity: {{ product.quantity }}, Category: {{ product.category }}
           </p>
         </ion-label>
+      </ion-item>
+
+      <!-- Botão Mostrar Mais abaixo do último item -->
+      <ion-item
+        *ngIf="hasMoreProducts"
+        lines="none"
+        class="show-more-item"
+        style="text-align: center; margin: 10px 0"
+      >
+        <ion-button
+          expand="full"
+          class="show-more-button"
+          (click)="loadMoreProducts()"
+        >
+          Mostrar mais
+        </ion-button>
       </ion-item>
     </ion-list>
 
@@ -57,5 +73,12 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+
+    <!-- Loading -->
+    <ion-loading
+      [isOpen]="isLoading"
+      message="Atualizando lista..."
+      duration="0"
+    ></ion-loading>
   </div>
 </ion-content>
