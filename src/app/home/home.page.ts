@@ -94,24 +94,28 @@ export class HomePage {
   loadEmployees() {
     const url =
       'https://projeto-mobile-api.vercel.app/api/v1/findAll/User?page=1&limit=3';
-    this.http.get<any[]>(url).subscribe(
-      (response) => {
-        if (Array.isArray(response)) {
-          this.employees = response.map((user: any) => ({
-            name: user.name || 'No Name',
-            position: user.role,
-            email: user.email,
-            icon: this.getIconForEmployee(user.role),
-          }));
-        } else {
-          console.error('Formato inesperado na resposta da API');
-          this.employees = [];
+
+    this.http
+      .get<{ data: any[]; total: number; page: number; lastPage: number }>(url)
+      .subscribe(
+        (response) => {
+          if (Array.isArray(response.data)) {
+            this.employees = response.data.map((user: any) => ({
+              name: user.name || 'No Name',
+              position: user.role,
+              email: user.email,
+              icon: this.getIconForEmployee(user.role),
+            }));
+          } else {
+            console.error('Formato inesperado na resposta da API');
+            this.employees = [];
+          }
+          console.log('API response:', response); // Para verificar se os dados estão corretos
+        },
+        (error) => {
+          console.error('Erro ao carregar funcionários:', error);
         }
-      },
-      (error) => {
-        console.error('Erro ao carregar funcionários:', error);
-      }
-    );
+      );
   }
 
   getIconForProduct(type: string) {

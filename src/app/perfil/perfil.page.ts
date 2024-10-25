@@ -87,14 +87,6 @@ export class PerfilPage {
     }
   }
 
-  async saveProfile() {
-    if (this.profileForm.invalid) {
-      return;
-    }
-    // Adicione aqui a lógica para salvar o perfil
-    console.log('Perfil salvo:', this.profileForm.value);
-  }
-
   openDatePicker() {
     this.isModalOpen = true;
   }
@@ -112,5 +104,50 @@ export class PerfilPage {
   isFieldInvalid(field: string): boolean {
     const control = this.profileForm.get(field);
     return !!(control && control.invalid && control.touched);
+  }
+
+  async saveProfile() {
+    if (this.profileForm.invalid) {
+      return; // Se o formulário for inválido, não faz nada
+    }
+
+    const token = await this.storage.get('token'); // Obtém o token do localStorage
+    const email = this.profileForm.get('email')?.value; // Obtém o email do formulário
+    const url = `https://projeto-mobile-api.vercel.app/api/v1/update/user/${email}`;
+
+    const headers = {
+      Authorization: `Bearer ${token}`, // Envia o token no cabeçalho Authorization
+      'Content-Type': 'application/json',
+    };
+
+    const userData = {
+      name: this.profileForm.get('name')?.value,
+      born_date: this.profileForm.get('dateOfBirth')?.value,
+    };
+
+    try {
+      // Fazendo a requisição PUT para atualizar o usuário
+      const response = await this.http
+        .put(url, userData, { headers })
+        .toPromise();
+
+      if (response) {
+        // Exibe uma mensagem de sucesso ou executa outra lógica
+        const alert = await this.alertController.create({
+          header: 'Sucesso',
+          message: 'Perfil atualizado com sucesso!',
+          buttons: ['OK'],
+        });
+        await alert.present();
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar o perfil:', error);
+      const alert = await this.alertController.create({
+        header: 'Erro',
+        message: 'Ocorreu um erro ao atualizar o perfil. Tente novamente.',
+        buttons: ['OK'],
+      });
+      await alert.present();
+    }
   }
 }

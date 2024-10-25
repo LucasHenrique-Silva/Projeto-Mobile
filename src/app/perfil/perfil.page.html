@@ -6,7 +6,7 @@
         icon="chevron-back-outline"
       ></ion-back-button>
     </ion-buttons>
-    <ion-title class="custom-title">perfil</ion-title>
+    <ion-title class="custom-title">Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -21,13 +21,10 @@
       </ion-note>
     </ion-item>
 
-    <!-- Campo para o email com validação automática -->
-    <ion-item [class.invalid]="isFieldInvalid('email')">
+    <!-- Campo para o email (somente leitura) -->
+    <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input formControlName="email" type="email" readonly></ion-input>
-      <ion-note slot="error" *ngIf="isFieldInvalid('email')">
-        Please enter a valid email address.
-      </ion-note>
     </ion-item>
 
     <!-- Campo para a data de nascimento -->
@@ -65,10 +62,10 @@
     </ion-modal>
 
     <!-- Botão para salvar o perfil -->
-    <!-- <ion-footer>
+    <ion-footer>
       <ion-button expand="full" type="submit" [disabled]="profileForm.invalid">
         Save Profile
       </ion-button>
-    </ion-footer> -->
+    </ion-footer>
   </form>
 </ion-content>
