@@ -24,7 +24,7 @@
     <!-- Campo para o email com validação automática -->
     <ion-item [class.invalid]="isFieldInvalid('email')">
       <ion-label position="floating">Email</ion-label>
-      <ion-input formControlName="email" type="email"></ion-input>
+      <ion-input formControlName="email" type="email" readonly></ion-input>
       <ion-note slot="error" *ngIf="isFieldInvalid('email')">
         Please enter a valid email address.
       </ion-note>
@@ -47,15 +47,6 @@
     <!-- Modal para exibir o calendário -->
     <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
       <ng-template>
-        <ion-header>
-          <ion-toolbar>
-            <ion-title>Select Date of Birth</ion-title>
-            <ion-buttons slot="end">
-              <ion-button (click)="closeModal()">Close</ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-
         <ion-content>
           <ion-datetime
             formControlName="dateOfBirth"
@@ -63,6 +54,9 @@
             pickerFormat="DD/MM/YYYY"
             [min]="minDate"
             [max]="maxDate"
+            presentation="date"
+            size="cover"
+            showPicker="false"
           >
           </ion-datetime>
           <ion-button expand="full" (click)="saveDate()">Save Date</ion-button>

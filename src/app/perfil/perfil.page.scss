@@ -1,10 +1,19 @@
-ion-content {
-  --background: transparent;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
+ion-modal {
+  --background: rgba(44, 39, 45, 0.2);
+
+  &::part(content) {
+    backdrop-filter: blur(2px);
+  }
+
+  ion-content {
+    --background: transparent;
+    --padding-top: 25vh;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    ion-datetime {
+      --border-radius: 8px;
+    }
+  }
 }
 
 .custom-title {
@@ -55,23 +64,9 @@ ion-input {
   font-size: 16px;
 }
 
-ion-modal {
-  --background: #ffffff; /* Fundo branco para o modal */
-  --border-radius: 10px; /* Borda arredondada para o modal */
-}
-
-ion-datetime {
-  --color: #007bff; /* Cor azul para os ícones e datas */
-  --padding-bottom: 10px;
-}
-
 ion-icon {
   color: #7a7a7a;
   font-size: 20px;
-}
-
-ion-toolbar {
-  --background: transparent; /* cor branca */
 }
 
 ion-input[readonly] {
