@@ -1,0 +1,95 @@
+ion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+ion-item {
+  --border-width: 1px;
+  --border-radius: 8px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+ion-item:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+ion-label {
+  // color: #4d4d4d;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+ion-input {
+  --padding-start: 10px;
+  font-size: 16px;
+  color: #333; /* Cor escura para o texto do input */
+}
+
+ion-modal {
+  /* Fundo branco para o modal */
+  --border-radius: 10px; /* Borda arredondada para o modal */
+}
+
+ion-datetime {
+  --color: #007bff; /* Cor azul para os ícones e datas */
+  --padding-bottom: 10px;
+}
+
+ion-icon {
+  color: #4d4d4d;
+  font-size: 20px;
+}
+
+ion-input[readonly] {
+  pointer-events: none;
+}
+
+ion-tab-bar.styled-tab-bar {
+  --border-top: 1px solid #dcdcdc; /* Borda superior */
+}
+
+ion-tab-button {
+  --color-selected: #007bff; /* Cor azul para o botão selecionado */
+  --color: #7a7a7a; /* Cor cinza para os botões não selecionados */
+}
+
+ion-tab-button:hover {
+  --color: #0056b3; /* Azul mais escuro ao passar o mouse */
+}
+
+ion-modal {
+  --background: rgba(44, 39, 45, 0.2);
+
+  &::part(content) {
+    backdrop-filter: blur(2px);
+  }
+
+  ion-content {
+    --background: transparent;
+    --padding-top: 25vh;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    ion-datetime {
+      --border-radius: 8px;
+    }
+  }
+}
+
+ion-item ion-icon {
+  color: #3880ff;
+}
+
+ion-fab-button ion-icon {
+  font-size: 24px;
+}
+
+ion-footer ion-icon {
+  font-size: 20px; /* Diminuindo o tamanho dos ícones no footer */
+  color: #3880ff;
+}

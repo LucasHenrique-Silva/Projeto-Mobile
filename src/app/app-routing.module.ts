@@ -29,6 +29,20 @@ const routes: Routes = [
     loadChildren: () =>
       import('./home/home.module').then((m) => m.HomePageModule),
   },
+  {
+    path: 'editar-perfil/:email',
+    loadChildren: () =>
+      import('./editar-perfil/editar-perfil.module').then(
+        (m) => m.EditarPerfilPageModule
+      ),
+  },
+  {
+    path: 'employee-accounts',
+    loadChildren: () =>
+      import('./employee-accounts/employee-accounts.module').then(
+        (m) => m.EmployeeAccountsPageModule
+      ),
+  },
 ];
 
 @NgModule({

@@ -54,3 +54,51 @@ ion-list {
 .show-more-item {
   margin: 10px 0; /* Espaço em volta do item */
 }
+
+.online-status {
+  color: green;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.offline-status {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.styled-tab-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 10; /* Mantém a barra acima de outros elementos */
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve para destaque */
+  background-color: #ffffff; /* Cor de fundo branca */
+}
+
+ion-footer {
+  font-size: 14px; /* Diminuindo o tamanho da fonte */
+}
+
+ion-icon {
+  font-size: 20px; /* Diminuindo o tamanho dos ícones */
+}
+
+ion-button {
+  --ion-button-padding: 0; /* Remove padding para botões */
+}
+
+/* Ajuste do espaçamento e tamanho para os labels */
+ion-label {
+  font-size: 14px; /* Diminuindo o tamanho do texto do rótulo */
+}
+.scrollable-buttons {
+  display: flex; /* Para alinhar os botões em linha */
+  overflow-x: auto; /* Permite rolagem horizontal */
+  -webkit-overflow-scrolling: touch; /* Para rolagem suave em dispositivos móveis */
+  white-space: nowrap; /* Impede quebra de linha dos botões */
+}
+
+ion-button {
+  flex-shrink: 0; /* Evita que os botões encolham */
+}

@@ -1,0 +1,88 @@
+ion-modal {
+  --background: rgba(44, 39, 45, 0.2);
+
+  &::part(content) {
+    backdrop-filter: blur(2px);
+  }
+
+  ion-content {
+    --background: transparent;
+    --padding-top: 25vh;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    ion-datetime {
+      --border-radius: 8px;
+    }
+  }
+}
+
+.custom-title {
+  flex: 1; /* Faz o título ocupar o espaço restante */
+  text-align: center; /* Centraliza o texto */
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: transparent;
+  --border-width: 1px;
+  --border-radius: 8px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+ion-item.invalid {
+  --background: #f2a2a2; /* Fundo vermelho claro para indicar erro */
+}
+
+ion-item:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+ion-button {
+  --background: #007bff;
+  --border-radius: 8px;
+  color: #ffffff;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+ion-button:hover {
+  --background: #0056b3; /* Darker blue on hover */
+}
+
+ion-label {
+  color: #4d4d4d;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+ion-input {
+  --padding-start: 10px;
+  font-size: 16px;
+}
+
+ion-icon {
+  color: #7a7a7a;
+  font-size: 20px;
+}
+
+ion-input[readonly] {
+  pointer-events: none;
+}
+
+ion-tab-bar.styled-tab-bar {
+  --background: #ffffff; /* Fundo branco */
+  --border-top: 1px solid #dcdcdc; /* Borda superior */
+}
+
+ion-tab-button {
+  --color-selected: #007bff; /* Cor azul para o botão selecionado */
+  --color: #7a7a7a; /* Cor cinza para os botões não selecionados */
+}
+
+ion-tab-button:hover {
+  --color: #0056b3; /* Azul mais escuro ao passar o mouse */
+}

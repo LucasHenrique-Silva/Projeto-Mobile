@@ -42,7 +42,6 @@
     </ion-list>
 
     <!-- Seção de funcionários -->
-    <!-- Seção de funcionários -->
     <h2>Employees</h2>
     <ion-list>
       <ion-item
@@ -53,12 +52,19 @@
         <ion-icon [name]="employee.icon" slot="start"></ion-icon>
         <ion-label>
           <h3>{{ employee.name }}</h3>
-          <!-- Exibir email apenas se o usuário logado for admin -->
           <p *ngIf="loggedInUserRole === 'admin'">
             Email: {{ employee.email }}
           </p>
           <p>Role: {{ employee.position }}</p>
         </ion-label>
+        <ion-button
+          *ngIf="loggedInUserRole === 'admin'"
+          fill="clear"
+          slot="end"
+          (click)="goToEditProfile(employee.email)"
+        >
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
       </ion-item>
     </ion-list>
 
@@ -73,7 +79,7 @@
         <ion-col>
           <ion-button expand="full" (click)="someAction2()" color="secondary">
             <ion-icon slot="start" name="settings-outline"></ion-icon>
-            Deslogar
+            Desloga
           </ion-button>
         </ion-col>
       </ion-row>
@@ -87,3 +93,28 @@
     ></ion-loading>
   </div>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="scrollable-buttons" slot="start">
+      <ion-buttons>
+        <ion-button (click)="goToHome()">
+          <ion-icon name="home-outline"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-button>
+        <ion-button (click)="goToProducts()">
+          <ion-icon name="pricetag-outline"></ion-icon>
+          <ion-label>Produtos</ion-label>
+        </ion-button>
+        <ion-button (click)="goToEmployees()">
+          <ion-icon name="people-outline"></ion-icon>
+          <ion-label>Funcionários</ion-label>
+        </ion-button>
+        <ion-button (click)="goToProfile()">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <ion-label>Perfil</ion-label>
+        </ion-button>
+      </ion-buttons>
+    </div>
+  </ion-toolbar>
+</ion-footer>

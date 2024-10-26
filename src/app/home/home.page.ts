@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Storage } from '@ionic/storage-angular';
 
@@ -25,8 +25,14 @@ export class HomePage {
     private router: Router,
     private http: HttpClient,
     private storage: Storage,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private navCtrl: NavController
   ) {}
+
+  goToEditProfile(email: string) {
+    // Navega para a página de edição de perfil passando o e-mail como parâmetro
+    this.router.navigate(['/edit-profile', { email }]);
+  }
 
   ionViewWillEnter() {
     this.getLoggedInUserRole(); // Obtém o role do usuário logado
@@ -160,10 +166,6 @@ export class HomePage {
     this.router.navigate(['/product-creation']);
   }
 
-  goToProfile() {
-    this.router.navigate(['/perfil']);
-  }
-
   someAction2() {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
@@ -182,5 +184,21 @@ export class HomePage {
     if (this.autoRefreshInterval) {
       clearInterval(this.autoRefreshInterval);
     }
+  }
+
+  goToProfile() {
+    this.router.navigate(['/perfil']);
+  }
+
+  goToHome() {
+    this.router.navigate(['/home']);
+  }
+
+  goToProducts() {
+    this.router.navigate(['/products']);
+  }
+
+  goToEmployees() {
+    this.router.navigate(['/employee-accounts']);
   }
 }

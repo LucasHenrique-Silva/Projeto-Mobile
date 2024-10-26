@@ -35,3 +35,34 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+/* Estilos do footer */
+ion-footer {
+  font-size: 14px; /* Diminuindo o tamanho da fonte do footer */
+}
+
+/* Estilos dos ícones dentro do footer */
+ion-footer ion-icon {
+  font-size: 20px; /* Diminuindo o tamanho dos ícones no footer */
+  color: #3880ff;
+}
+
+/* Estilos dos botões dentro do footer */
+ion-footer ion-button {
+  --ion-button-padding: 0; /* Remove padding para botões */
+  flex-shrink: 0; /* Evita que os botões encolham */
+  color: #fff !important
+}
+
+/* Ajuste do espaçamento e tamanho para os labels no footer */
+ion-footer ion-label {
+  font-size: 14px; /* Diminuindo o tamanho do texto do rótulo no footer */
+}
+
+/* Estilos para os botões roláveis no footer */
+.scrollable-buttons {
+  display: flex; /* Para alinhar os botões em linha */
+  overflow-x: auto; /* Permite rolagem horizontal */
+  -webkit-overflow-scrolling: touch; /* Para rolagem suave em dispositivos móveis */
+  white-space: nowrap; /* Impede quebra de linha dos botões */
+}

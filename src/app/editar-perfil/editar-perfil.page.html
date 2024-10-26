@@ -1,0 +1,71 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref=""
+        icon="chevron-back-outline"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title class="custom-title">Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+    <!-- Campo para o nome com validação automática -->
+    <ion-item [class.invalid]="isFieldInvalid('name')">
+      <ion-label position="floating">Name</ion-label>
+      <ion-input formControlName="name"></ion-input>
+      <ion-note slot="error" *ngIf="isFieldInvalid('name')">
+        Name is required and must be at least 3 characters long.
+      </ion-note>
+    </ion-item>
+
+    <!-- Campo para o email (somente leitura) -->
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email" readonly></ion-input>
+    </ion-item>
+
+    <!-- Campo para a data de nascimento -->
+    <ion-item (click)="openDatePicker()">
+      <ion-label position="stacked">Date of birth</ion-label>
+      <ion-input
+        [value]="dateOfBirth ? (dateOfBirth | date: 'dd/MM/yyyy') : ''"
+        placeholder=" "
+        readonly
+      >
+      </ion-input>
+      <ion-note slot="error" *ngIf="isFieldInvalid('dateOfBirth')">
+        Date of birth is required.
+      </ion-note>
+    </ion-item>
+
+    <!-- Modal para exibir o calendário -->
+    <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
+      <ng-template>
+        <ion-content>
+          <ion-datetime
+            formControlName="dateOfBirth"
+            displayFormat="DD/MM/YYYY"
+            pickerFormat="DD/MM/YYYY"
+            [min]="minDate"
+            [max]="maxDate"
+            presentation="date"
+            size="cover"
+            showPicker="false"
+          >
+          </ion-datetime>
+          <ion-button expand="full" (click)="saveDate()">Save Date</ion-button>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+    <!-- Botão para salvar o perfil -->
+    <ion-footer>
+      <ion-button expand="full" type="submit" [disabled]="profileForm.invalid">
+        Save Profile
+      </ion-button>
+    </ion-footer>
+  </form>
+</ion-content>

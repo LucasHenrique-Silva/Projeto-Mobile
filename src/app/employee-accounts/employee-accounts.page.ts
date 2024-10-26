@@ -1,0 +1,102 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Storage } from '@ionic/storage-angular';
+
+@Component({
+  selector: 'app-employee-accounts',
+  templateUrl: './employee-accounts.page.html',
+  styleUrls: ['./employee-accounts.page.scss'],
+})
+export class EmployeeAccountsPage implements OnInit {
+  employees: any[] = []; // Inicialize como um array vazio
+  loggedInUserRole: string | null = null; // Armazenar o role do usuário logado
+
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private storage: Storage
+  ) {}
+
+  ngOnInit() {
+    this.loadEmployees(); // Carrega os funcionários ao inicializar o componente
+    this.getLoggedInUserRole();
+  }
+
+  async getLoggedInUserRole() {
+    this.loggedInUserRole = await this.storage.get('userRole');
+    console.log('Role recuperada:', this.loggedInUserRole); // Verificação de log
+  }
+
+  goToEditProfile(email: string) {
+    this.router.navigate(['/editar-perfil', email]);
+  }
+
+  loadEmployees() {
+    const url =
+      'https://projeto-mobile-api.vercel.app/api/v1/findAll/User?page=1&limit=3';
+
+    this.http
+      .get<{ data: any[]; total: number; page: number; lastPage: number }>(url)
+      .subscribe(
+        (response) => {
+          if (Array.isArray(response.data)) {
+            this.employees = response.data.map((user: any) => ({
+              name: user.name || 'No Name',
+              position: user.role,
+              email: user.email, // O email ainda é carregado, mas será exibido apenas para admin
+              icon: this.getIconForEmployee(user.role),
+            }));
+          } else {
+            console.error('Formato inesperado na resposta da API');
+            this.employees = [];
+          }
+        },
+        (error) => {
+          console.error('Erro ao carregar funcionários:', error);
+        }
+      );
+  }
+
+  goToProfile(employee: any) {
+    this.router.navigate(['/perfil'], {
+      queryParams: { name: employee.name, email: employee.email },
+    });
+  }
+
+  addEmployee() {
+    console.log('Add new employee');
+  }
+
+  getIconForEmployee(role: string): string {
+    // Aqui você pode mapear os papéis para ícones específicos
+    switch (role) {
+      case 'admin':
+        return 'person-circle-outline';
+      case 'caixa':
+        return 'cash-outline';
+      case 'estoque':
+        return 'clipboard-outline';
+      default:
+        return 'person-outline';
+    }
+  }
+
+  goToYourProfile() {
+    this.router.navigate(['/perfil']);
+  }
+
+  goToHome() {
+    this.router.navigate(['/home']);
+  }
+
+  goToProducts() {
+    this.router.navigate(['/products']);
+  }
+
+  goToEmployees() {
+    this.router.navigate(['/employee-accounts']);
+  }
+
+  
+}
