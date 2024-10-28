@@ -1,0 +1,81 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/"
+        icon="chevron-back-outline"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title class="custom-title">Cadastrar funcionario</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input formControlName="name" type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input
+        formControlName="password"
+        type="password"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <!-- Campo para a data de nascimento -->
+    <ion-item (click)="openDatePicker()">
+      <ion-label position="stacked">Data de nascimento</ion-label>
+      <ion-input
+        [value]="profileForm.get('born_date')?.value ? (profileForm.get('born_date')?.value | date: 'dd/MM/yyyy') : ''"
+        placeholder=" "
+        readonly
+      >
+      </ion-input>
+      <ion-note slot="error" *ngIf="isFieldInvalid('born_date')">
+        Data de nascimento é obrigatória.
+      </ion-note>
+    </ion-item>
+
+    <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
+      <ng-template>
+        <ion-content>
+          <ion-datetime
+            formControlName="born_date"
+            displayFormat="DD/MM/YYYY"
+            pickerFormat="DD/MM/YYYY"
+            [min]="minDate"
+            [max]="maxDate"
+            presentation="date"
+            size="cover"
+            showPicker="false"
+          >
+          </ion-datetime>
+          <ion-button expand="full" (click)="saveDate()"
+            >Salvar Data</ion-button
+          >
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+    <ion-item>
+      <ion-label position="stacked">Função</ion-label>
+      <ion-select formControlName="role" placeholder="Admin">
+        <ion-select-option value="admin">Admin</ion-select-option>
+        <ion-select-option value="estoque">Estoque</ion-select-option>
+        <ion-select-option value="caixa">Caixa</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="full" color="primary" type="submit"
+      >Criar conta</ion-button
+    >
+  </form>
+</ion-content>

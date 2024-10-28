@@ -43,6 +43,11 @@ const routes: Routes = [
         (m) => m.EmployeeAccountsPageModule
       ),
   },
+  {
+    path: 'cadastro',
+    loadChildren: () =>
+      import('./cadastro/cadastro.module').then((m) => m.CadastroPageModule),
+  },
 ];
 
 @NgModule({

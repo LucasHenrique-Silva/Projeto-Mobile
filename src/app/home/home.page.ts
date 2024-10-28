@@ -35,13 +35,30 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    this.getLoggedInUserRole(); // Obtém o role do usuário logado
-    this.refreshData();
-    this.startAutoRefresh();
+    this.checkToken();
   }
 
   ionViewWillLeave() {
     this.stopAutoRefresh();
+  }
+
+  async checkToken() {
+    try {
+      const token = await this.storage.get('token'); // Verifica o token
+      console.log(token);
+
+      // Se não houver token, redireciona para a página de login
+      if (!token) {
+        this.router.navigate(['/login']);
+        return;
+      }
+    } catch (error) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    this.getLoggedInUserRole(); // Obtém o role do usuário logado
+    this.refreshData();
+    this.startAutoRefresh();
   }
 
   // Obtém o role do usuário logado do localStorage (ou de onde está armazenado)

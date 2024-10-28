@@ -93,3 +93,11 @@ ion-footer ion-icon {
   font-size: 20px; /* Diminuindo o tamanho dos ícones no footer */
   color: #3880ff;
 }
+
+ion-footer ion-button.active-button ion-icon {
+  color: #d1d1d1; /* Muda a cor do ícone para ficar mais visível */
+}
+ion-footer ion-button.active-button ion-label {
+  font-weight: bolder;
+}
+

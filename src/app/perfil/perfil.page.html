@@ -69,3 +69,28 @@
     </ion-footer>
   </form>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="scrollable-buttons" slot="start">
+      <ion-buttons>
+        <ion-button (click)="goToHome()">
+          <ion-icon name="home-outline"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-button>
+        <ion-button (click)="goToProducts()">
+          <ion-icon name="pricetag-outline"></ion-icon>
+          <ion-label>Produtos</ion-label>
+        </ion-button>
+        <ion-button (click)="goToEmployees()">
+          <ion-icon name="people-outline"></ion-icon>
+          <ion-label>Funcionários</ion-label>
+        </ion-button>
+        <ion-button class="active-button" (click)="goToYourProfile()">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <ion-label>Perfil</ion-label>
+        </ion-button>
+      </ion-buttons>
+    </div>
+  </ion-toolbar>
+</ion-footer>

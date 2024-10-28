@@ -67,7 +67,7 @@ export class PerfilPage {
             `https://projeto-mobile-api.vercel.app/api/v1/findEmail/User/${storedEmail}`
           )
           .toPromise();
-
+        console.log(response);
         if (response) {
           // Preencher o formulário com os dados do usuário
           this.profileForm.patchValue({
@@ -159,5 +159,21 @@ export class PerfilPage {
       });
       await alert.present();
     }
+  }
+
+  goToYourProfile() {
+    this.router.navigate(['/perfil']);
+  }
+
+  goToHome() {
+    this.router.navigate(['/home']);
+  }
+
+  goToProducts() {
+    this.router.navigate(['/products']);
+  }
+
+  goToEmployees() {
+    this.router.navigate(['/employee-accounts']);
   }
 }

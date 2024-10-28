@@ -2,8 +2,11 @@
   <ion-toolbar>
     <ion-title>Employee Accounts</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon name="add-outline"></ion-icon>
+      <ion-button (click)="goToCadaster()" *ngIf="loggedInUserRole === 'admin'">
+        <ion-icon
+          *ngIf="loggedInUserRole === 'admin'"
+          name="add-outline"
+        ></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -15,7 +18,8 @@
     <ion-item *ngFor="let employee of employees">
       <ion-label>
         <h2>{{ employee.name }}</h2>
-        <p>{{ employee.email }}</p>
+        <p *ngIf="loggedInUserRole === 'admin'">{{ employee.email }}</p>
+        <p>{{ employee.position }}</p>
       </ion-label>
       <ion-icon
         name="settings-outline"
@@ -27,7 +31,12 @@
     </ion-item>
   </ion-list>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab
+    *ngIf="loggedInUserRole === 'admin'"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
     <ion-fab-button (click)="addEmployee()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
@@ -46,7 +55,7 @@
           <ion-icon name="pricetag-outline"></ion-icon>
           <ion-label>Produtos</ion-label>
         </ion-button>
-        <ion-button (click)="goToEmployees()">
+        <ion-button class="active-button" (click)="goToEmployees()">
           <ion-icon name="people-outline"></ion-icon>
           <ion-label>Funcionários</ion-label>
         </ion-button>

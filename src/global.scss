@@ -45,13 +45,14 @@ ion-footer {
 ion-footer ion-icon {
   font-size: 20px; /* Diminuindo o tamanho dos ícones no footer */
   color: #3880ff;
+  margin-right: 5px;
 }
 
 /* Estilos dos botões dentro do footer */
 ion-footer ion-button {
-  --ion-button-padding: 0; /* Remove padding para botões */
+  --ion-button-padding: 5px; /* Remove padding para botões */
   flex-shrink: 0; /* Evita que os botões encolham */
-  color: #fff !important
+  color: #fff !important;
 }
 
 /* Ajuste do espaçamento e tamanho para os labels no footer */
@@ -65,4 +66,12 @@ ion-footer ion-label {
   overflow-x: auto; /* Permite rolagem horizontal */
   -webkit-overflow-scrolling: touch; /* Para rolagem suave em dispositivos móveis */
   white-space: nowrap; /* Impede quebra de linha dos botões */
+}
+
+ion-footer ion-button.active-button ion-icon {
+  color: #d1d1d1; /* Muda a cor do ícone para ficar mais visível */
+}
+ion-footer ion-button.active-button ion-label {
+  font-weight: bolder;
+  color: #3880ff;
 }

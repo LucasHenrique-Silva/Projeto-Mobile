@@ -1,0 +1,24 @@
+ion-header {  
+  background-color: transparent;  
+}  
+
+ion-toolbar {  
+  --background: transparent;  
+}  
+
+
+
+ion-item {  
+  margin-bottom: 15px;  
+}  
+
+ion-button {  
+  background-color: #0056b3;  
+  
+}  
+ion-input {
+  
+  --padding-start: 10px;  
+  --border-radius: 8px;  
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}

@@ -18,9 +18,13 @@ export class EmployeeAccountsPage implements OnInit {
     private storage: Storage
   ) {}
 
+  ionViewWillEnter() {
+    this.getLoggedInUserRole();
+    this.loadEmployees();
+  }
+
   ngOnInit() {
     this.loadEmployees(); // Carrega os funcionários ao inicializar o componente
-    this.getLoggedInUserRole();
   }
 
   async getLoggedInUserRole() {
@@ -34,7 +38,7 @@ export class EmployeeAccountsPage implements OnInit {
 
   loadEmployees() {
     const url =
-      'https://projeto-mobile-api.vercel.app/api/v1/findAll/User?page=1&limit=3';
+      'https://projeto-mobile-api.vercel.app/api/v1/findAll/User?page=1';
 
     this.http
       .get<{ data: any[]; total: number; page: number; lastPage: number }>(url)
@@ -98,5 +102,9 @@ export class EmployeeAccountsPage implements OnInit {
     this.router.navigate(['/employee-accounts']);
   }
 
-  
+  goToCadaster() {
+    console.log('clique');
+
+    this.router.navigate(['/cadastro']);
+  }
 }
