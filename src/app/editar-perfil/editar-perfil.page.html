@@ -63,8 +63,21 @@
 
     <!-- Botão para salvar o perfil -->
     <ion-footer>
-      <ion-button expand="full" type="submit" [disabled]="profileForm.invalid">
-        Save Profile
+      <ion-button
+        class="salvar"
+        expand="full"
+        type="submit"
+        [disabled]="profileForm.invalid"
+      >
+        Salvar perfil
+      </ion-button>
+      <ion-button
+        class="delete"
+        expand="full"
+        (click)="deleteProfile()"
+        [disabled]="profileForm.invalid"
+      >
+        Deletar perfil
       </ion-button>
     </ion-footer>
   </form>

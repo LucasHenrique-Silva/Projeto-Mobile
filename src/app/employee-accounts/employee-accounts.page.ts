@@ -38,7 +38,7 @@ export class EmployeeAccountsPage implements OnInit {
 
   loadEmployees() {
     const url =
-      'https://projeto-mobile-api.vercel.app/api/v1/findAll/User?page=1';
+      'https://projeto-mobile-api.vercel.app/api/v1/findAll/User?page=1&limit=100';
 
     this.http
       .get<{ data: any[]; total: number; page: number; lastPage: number }>(url)

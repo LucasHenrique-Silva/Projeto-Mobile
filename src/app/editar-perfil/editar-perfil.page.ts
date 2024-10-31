@@ -112,33 +112,27 @@ export class EditarPerfilPage implements OnInit {
   }
 
   async saveProfile() {
-    // Verifica se o formulário é válido antes de prosseguir
     if (this.profileForm.invalid) {
       return;
     }
 
     try {
-      // Obtém o token do storage e o email do formulário
       const token = await this.storage.get('token');
       const email = this.profileForm.get('email')?.value;
 
-      // Configura a URL e os headers para a requisição
       const url = `https://projeto-mobile-api.vercel.app/api/v1/update/user/${email}`;
       const headers = {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       };
 
-      // Cria o objeto com os dados do usuário para atualização
       const userData = {
         name: this.profileForm.get('name')?.value,
         born_date: this.profileForm.get('dateOfBirth')?.value,
       };
 
-      // Realiza a requisição PUT para atualizar os dados do usuário
       await this.http.put(url, userData, { headers }).toPromise();
 
-      // Exibe o alerta de sucesso e navega para a página inicial
       const successAlert = await this.alertController.create({
         header: 'Sucesso',
         message: 'Perfil atualizado com sucesso!',
@@ -146,19 +140,56 @@ export class EditarPerfilPage implements OnInit {
           {
             text: 'OK',
             handler: () => {
-              this.router.navigate(['/home']); // Redireciona para a página inicial
+              this.router.navigate(['/employee-accounts']);
             },
           },
         ],
       });
       await successAlert.present();
     } catch (error) {
-      // Tratamento de erros com logging e alerta para o usuário
       console.error('Erro ao atualizar o perfil:', error);
       const errorAlert = await this.alertController.create({
         header: 'Erro',
         message:
           'Ocorreu um erro ao atualizar o perfil. Verifique sua conexão e tente novamente.',
+        buttons: ['OK'],
+      });
+      await errorAlert.present();
+    }
+  }
+
+  async deleteProfile() {
+    try {
+      const token = await this.storage.get('token');
+      const email = this.profileForm.get('email')?.value;
+
+      const url = `https://projeto-mobile-api.vercel.app/api/v1/delete/user/${email}`;
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      };
+
+      await this.http.delete(url, { headers }).toPromise();
+
+      const successAlert = await this.alertController.create({
+        header: 'Conta Deletada',
+        message: 'Sua conta foi deletada com sucesso!',
+        buttons: [
+          {
+            text: 'OK',
+            handler: () => {
+              this.router.navigate(['/employee-accounts']);
+            },
+          },
+        ],
+      });
+      await successAlert.present();
+    } catch (error) {
+      console.error('Erro ao deletar o perfil:', error);
+      const errorAlert = await this.alertController.create({
+        header: 'Erro',
+        message:
+          'Ocorreu um erro ao deletar o perfil. Verifique sua conexão e tente novamente.',
         buttons: ['OK'],
       });
       await errorAlert.present();
