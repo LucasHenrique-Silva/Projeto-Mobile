@@ -170,7 +170,7 @@ export class PerfilPage {
   }
 
   goToProducts() {
-    this.router.navigate(['/products']);
+    this.router.navigate(['/product-list']);
   }
 
   goToEmployees() {

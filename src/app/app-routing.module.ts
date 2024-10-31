@@ -48,6 +48,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./cadastro/cadastro.module').then((m) => m.CadastroPageModule),
   },
+  {
+    path: 'product-list',
+    loadChildren: () =>
+      import('./product-list/product-list.module').then(
+        (m) => m.ProductListPageModule
+      ),
+  },
 ];
 
 @NgModule({

@@ -212,7 +212,7 @@ export class HomePage {
   }
 
   goToProducts() {
-    this.router.navigate(['/products']);
+    this.router.navigate(['/product-list']);
   }
 
   goToEmployees() {

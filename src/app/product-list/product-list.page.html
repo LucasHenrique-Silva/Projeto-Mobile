@@ -1,0 +1,161 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title>Product List</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openSearch()">
+        <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-searchbar
+    [(ngModel)]="searchQuery"
+    *ngIf="isSearchOpen"
+    placeholder="Search products..."
+    (ionInput)="filterProducts()"
+  ></ion-searchbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Botões de filtro -->
+  <ion-grid>
+    <ion-row
+      class="ion-justify-content-around ion-align-items-center ion-no-padding"
+    >
+      <ion-col size="" size-sm="">
+        <ion-button
+          [color]="selectedFilter === '' ? 'primary' : 'light'"
+          (click)="selectFilter('')"
+          >Padrao</ion-button
+        >
+      </ion-col>
+      <ion-col size="" size-sm="">
+        <ion-button
+          [color]="selectedFilter === 'quantity' ? 'primary' : 'light'"
+          (click)="selectFilter('quantity')"
+          >Quantity</ion-button
+        >
+      </ion-col>
+      <ion-col size="" size-sm="">
+        <ion-button
+          [color]="selectedFilter === 'type' ? 'primary' : 'light'"
+          (click)="selectFilter('type')"
+          >Type</ion-button
+        >
+      </ion-col>
+      <ion-col size="" size-sm="">
+        <ion-button
+          [color]="selectedFilter === 'buy_price' ? 'primary' : 'light'"
+          (click)="selectFilter('buy_price')"
+          >Buy Price</ion-button
+        >
+      </ion-col>
+      <ion-col size="" size-sm="">
+        <ion-button
+          [color]="selectedFilter === 'sell_price' ? 'primary' : 'light'"
+          (click)="selectFilter('sell_price')"
+          >Sell Price</ion-button
+        >
+      </ion-col>
+      <ion-col size="" size-sm="">
+        <ion-button
+          [color]="selectedFilter === 'where_stored' ? 'primary' : 'light'"
+          (click)="selectFilter('where_stored')"
+          >Location</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Categorias -->
+  <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterProducts()">
+    <div class="scrollable-buttons">
+      <ion-segment-button (click)="loadProducts()" value="all"
+        >All</ion-segment-button
+      >
+      <ion-segment-button value="eletronico">Eletronico</ion-segment-button>
+      <ion-segment-button value="mobilia">Mobilia</ion-segment-button>
+      <ion-segment-button value="vestimenta">Vestimenta</ion-segment-button
+      ><ion-segment-button value="comida">Comida</ion-segment-button>
+      <ion-segment-button value="outro">Outro</ion-segment-button>
+    </div>
+  </ion-segment>
+
+  <!-- Lista de Produtos -->
+  <!-- Lista de Produtos -->
+  <ion-list>
+    <ion-item
+      *ngFor="let product of filteredProducts"
+      (click)="toggleProduct(product)"
+    >
+      <ion-icon [name]="getIcon(product.type)" slot="start"></ion-icon>
+      <ion-label>
+        <h2>{{ product.name }}</h2>
+        <p>Quantity: {{ product.quantity }}</p>
+        <p>Type: {{ product.type }}</p>
+
+        <!-- Exibe mais informações quando o produto está expandido -->
+        <div *ngIf="expandedProduct === product">
+          <p>Preço de compra: {{ product.buy_price | currency }}</p>
+          <p>Preço de venda: {{ product.sell_price | currency }}</p>
+          <p>Localização: {{ product.where_stored }}</p>
+        </div>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button
+          color="primary"
+          (click)="editProduct(product); $event.stopPropagation()"
+        >
+          <ion-icon name="pencil-outline"></ion-icon>
+        </ion-button>
+        <ion-button
+          color="danger"
+          (click)="deleteProduct(product); $event.stopPropagation()"
+        >
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <!-- Botão Mostrar Mais -->
+  <ion-button
+    *ngIf="hasMoreProducts"
+    expand="full"
+    (click)="loadMoreProducts()"
+  >
+    Mostrar Mais
+  </ion-button>
+
+  <!-- Botão de adicionar produto -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="addProduct()">
+      <ion-icon class="icon-add" name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="scrollable-buttons" slot="start">
+      <ion-buttons>
+        <ion-button (click)="goToHome()">
+          <ion-icon name="home-outline"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-button>
+        <ion-button class="active-button" (click)="goToProducts()">
+          <ion-icon name="pricetag-outline"></ion-icon>
+          <ion-label>Produtos</ion-label>
+        </ion-button>
+        <ion-button (click)="goToEmployees()">
+          <ion-icon name="people-outline"></ion-icon>
+          <ion-label>Funcionários</ion-label>
+        </ion-button>
+        <ion-button (click)="goToProfile()">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <ion-label>Perfil</ion-label>
+        </ion-button>
+      </ion-buttons>
+    </div>
+  </ion-toolbar>
+</ion-footer>

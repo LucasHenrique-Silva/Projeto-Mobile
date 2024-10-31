@@ -95,7 +95,7 @@ export class EmployeeAccountsPage implements OnInit {
   }
 
   goToProducts() {
-    this.router.navigate(['/products']);
+    this.router.navigate(['/product-list']);
   }
 
   goToEmployees() {
