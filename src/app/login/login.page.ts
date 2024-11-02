@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { HttpClient } from '@angular/common/http';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthResponse } from './auth-response.model';
 
 @Component({
@@ -16,7 +17,9 @@ export class LoginPage {
   constructor(
     private router: Router,
     private storage: Storage,
-    private http: HttpClient
+    private http: HttpClient,
+    private alertController: AlertController,
+    private loadingController: LoadingController
   ) {
     this.initStorage();
   }
@@ -26,6 +29,12 @@ export class LoginPage {
   }
 
   async login() {
+    const loading = await this.loadingController.create({
+      message: 'Logando...',
+      spinner: 'crescent',
+    });
+    await loading.present();
+
     try {
       const response = await this.http
         .post<AuthResponse>(
@@ -38,19 +47,37 @@ export class LoginPage {
         .toPromise();
 
       if (response && response.token) {
-        // Verifica se a propriedade userExists existe
         if (response.userExists && response.userExists.email) {
           await this.storage.set('token', response.token);
           await this.storage.set('email', response.userExists.email);
           await this.storage.set('userRole', response.userExists.role);
-
           this.router.navigate(['/home']);
         } else {
+          await this.showAlert('Falha', 'Usuário não encontrado.');
         }
       } else {
+        await this.showAlert(
+          'Erro',
+          'Falha ao logar. Verifique suas credenciais.'
+        );
       }
     } catch (error) {
+      await this.showAlert(
+        'Erro',
+        'Falha ao logar. Verifique suas credenciais.'
+      );
       console.error('Erro ao fazer login:', error);
+    } finally {
+      loading.dismiss();
     }
+  }
+
+  async showAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+    await alert.present();
   }
 }

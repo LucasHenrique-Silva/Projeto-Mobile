@@ -105,12 +105,14 @@
         <ion-button
           color="primary"
           (click)="editProduct(product); $event.stopPropagation()"
+          *ngIf="loggedInUserRole !== 'caixa'"
         >
           <ion-icon name="pencil-outline"></ion-icon>
         </ion-button>
         <ion-button
           color="danger"
           (click)="deleteProduct(product); $event.stopPropagation()"
+          *ngIf="loggedInUserRole === 'admin'"
         >
           <ion-icon name="trash-outline"></ion-icon>
         </ion-button>

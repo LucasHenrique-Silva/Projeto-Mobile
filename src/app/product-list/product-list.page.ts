@@ -3,6 +3,7 @@ import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { interval, Subscription } from 'rxjs';
+import { Storage } from '@ionic/storage-angular';
 
 interface Product {
   id: string;
@@ -34,16 +35,19 @@ export class ProductListPage implements OnDestroy {
   expandedProduct: Product | null = null;
   updateSubscription: Subscription | undefined;
   hasMoreProducts: boolean = true;
+  loggedInUserRole: string | null = null; // Armazenar o role do usuário logado
 
   constructor(
     private router: Router,
     private http: HttpClient,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private storage: Storage
   ) {}
 
   async ionViewWillEnter() {
     await this.loadProducts(); // Carrega os produtos ao entrar na página
     this.setupAutoUpdate(); // Configura a atualização a cada 2 minutos
+    await this.getLoggedInUserRole();
   }
 
   ngOnDestroy() {
@@ -51,6 +55,9 @@ export class ProductListPage implements OnDestroy {
     if (this.updateSubscription) {
       this.updateSubscription.unsubscribe();
     }
+  }
+  async getLoggedInUserRole() {
+    this.loggedInUserRole = await this.storage.get('userRole');
   }
 
   openSearch() {
