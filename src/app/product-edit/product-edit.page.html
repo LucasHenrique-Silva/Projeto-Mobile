@@ -1,0 +1,120 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/"
+        icon="chevron-back-outline"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title class="custom-title">Criar Produto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="white-background black-text">
+  <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+    <ion-list>
+      <!-- Name -->
+      <ion-item class="form-item" [class.invalid]="isFieldInvalid('name')">
+        <ion-label position="stacked">Name</ion-label>
+        <ion-input
+          type="text"
+          formControlName="name"
+          placeholder="Apple iPhone 14"
+        ></ion-input>
+      </ion-item>
+      <ion-note *ngIf="isFieldInvalid('name')" color="danger">
+        Nome é obrigatorio.
+      </ion-note>
+
+      <!-- Quantity -->
+      <ion-item class="form-item" [class.invalid]="isFieldInvalid('quantity')">
+        <ion-label position="stacked">Quantity</ion-label>
+        <ion-input
+          type="number"
+          formControlName="quantity"
+          placeholder="50"
+        ></ion-input>
+      </ion-item>
+      <ion-note *ngIf="isFieldInvalid('quantity')" color="danger">
+        Quantidade tem que ser maior que 0.
+      </ion-note>
+
+      <!-- Type -->
+      <ion-item [class.invalid]="isFieldInvalid('type')">
+        <ion-label position="stacked">Type</ion-label>
+        <ion-select
+          formControlName="type"
+          placeholder="Electronics"
+          [interfaceOptions]="customAlertOptions"
+        >
+          <ion-select-option value="eletronico">Eletronico</ion-select-option>
+          <ion-select-option value="mobilia">Mobilia</ion-select-option>
+          <ion-select-option value="vestimenta">Vestimenta</ion-select-option>
+          <ion-select-option value="comida">Comida</ion-select-option>
+          <ion-select-option value="outro">Outro</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-note *ngIf="isFieldInvalid('type')" color="danger">
+        Tipo é obrigatorio.
+      </ion-note>
+
+      <!-- Purchase Price -->
+      <ion-item class="form-item" [class.invalid]="isFieldInvalid('buy_price')">
+        <ion-label position="stacked">Purchase Price</ion-label>
+        <ion-input
+          type="number"
+          formControlName="buy_price"
+          placeholder="$799"
+        ></ion-input>
+      </ion-item>
+      <ion-note *ngIf="isFieldInvalid('buy_price')" color="danger">
+        Preço de compra e obrigatorio e maior que 0.
+      </ion-note>
+
+      <!-- Sale Price -->
+      <ion-item
+        class="form-item"
+        [class.invalid]="isFieldInvalid('sell_price') || isSellPriceInvalid()"
+      >
+        <ion-label position="stacked">Sale Price</ion-label>
+        <ion-input
+          type="number"
+          formControlName="sell_price"
+          placeholder="$999"
+        ></ion-input>
+      </ion-item>
+      <ion-note *ngIf="isSellPriceInvalid()" color="danger">
+        Preço de venda tem que ser maior que o de compra.
+      </ion-note>
+
+      <!-- Location -->
+      <ion-item
+        class="form-item"
+        [class.invalid]="isFieldInvalid('where_stored')"
+      >
+        <ion-label position="stacked">Location</ion-label>
+        <ion-input
+          type="text"
+          formControlName="where_stored"
+          placeholder="Deposit"
+        ></ion-input>
+      </ion-item>
+      <ion-note *ngIf="isFieldInvalid('where_stored')" color="danger">
+        Localização é obrigatoria.
+      </ion-note>
+    </ion-list>
+
+    <!-- Save Button -->
+    <ion-footer>
+      <ion-button
+        color="primary"
+        type="submit"
+        [disabled]="productForm.invalid"
+        class="custom-save-button"
+      >
+        <ion-icon slot="start" name="save" class="custom-button"></ion-icon>
+        Atualizar
+      </ion-button>
+    </ion-footer>
+  </form>
+</ion-content>

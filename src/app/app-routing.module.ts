@@ -55,6 +55,13 @@ const routes: Routes = [
         (m) => m.ProductListPageModule
       ),
   },
+  {
+    path: 'product-edit/:id',
+    loadChildren: () =>
+      import('./product-edit/product-edit.module').then(
+        (m) => m.ProductCreationPageModule
+      ),
+  },
 ];
 
 @NgModule({

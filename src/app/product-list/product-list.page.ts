@@ -30,7 +30,7 @@ export class ProductListPage implements OnDestroy {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   page = 1;
-  limit = 10;
+  limit = 50;
   expandedProduct: Product | null = null;
   updateSubscription: Subscription | undefined;
   hasMoreProducts: boolean = true;
@@ -103,11 +103,8 @@ export class ProductListPage implements OnDestroy {
               this.disableInfiniteScroll();
             }
           }
-          console.log(response.data.length);
-          console.log(this.hasMoreProducts);
 
           if (response.data.length < this.limit) {
-            console.log(this.hasMoreProducts);
             this.disableInfiniteScroll();
           } else {
             this.hasMoreProducts = true;
@@ -149,13 +146,15 @@ export class ProductListPage implements OnDestroy {
   getIcon(type: string): string {
     switch (type) {
       case 'eletronico':
-        return 'laptop-outline';
+        return 'phone-portrait-outline';
+      case 'mobilia':
+        return 'bed-outline';
       case 'vestimenta':
         return 'shirt-outline';
       case 'comida':
-        return 'nutrition-outline';
-      case 'mobilia':
-        return 'bed-outline';
+        return 'restaurant-outline';
+      case 'outro':
+        return 'cube-outline';
       default:
         return 'cube-outline';
     }
@@ -166,7 +165,7 @@ export class ProductListPage implements OnDestroy {
   }
 
   editProduct(product: Product) {
-    console.log('Edit Product:', product);
+    this.router.navigate(['/product-edit', product.id]); // Navega para a página de edição com o ID do produto
   }
 
   deleteProduct(product: Product) {

@@ -55,7 +55,7 @@ export class RegisterPage {
     if (this.profileForm.valid) {
       // Pega os valores do formulário
       const formData = this.profileForm.value;
-      console.log(formData);
+
 
       try {
         // Envia a requisição para a API
@@ -65,7 +65,7 @@ export class RegisterPage {
             formData
           )
           .toPromise();
-        console.log(response);
+     
 
         // Exibe um alerta de sucesso
         const alert = await this.alertController.create({

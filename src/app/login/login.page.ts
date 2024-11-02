@@ -37,25 +37,17 @@ export class LoginPage {
         )
         .toPromise();
 
-      console.log('Resposta da API:', response); // Inspecione a resposta da API
-
       if (response && response.token) {
         // Verifica se a propriedade userExists existe
         if (response.userExists && response.userExists.email) {
           await this.storage.set('token', response.token);
           await this.storage.set('email', response.userExists.email);
           await this.storage.set('userRole', response.userExists.role);
-          console.log('Login bem-sucedido');
-          console.log(
-            'Role armazenada no storage:',
-            await this.storage.get('userRole')
-          );
+
           this.router.navigate(['/home']);
         } else {
-          console.log('Usuário ou email não encontrado na resposta.');
         }
       } else {
-        console.log('Token não recebido na resposta.');
       }
     } catch (error) {
       console.error('Erro ao fazer login:', error);

@@ -29,7 +29,6 @@ export class EmployeeAccountsPage implements OnInit {
 
   async getLoggedInUserRole() {
     this.loggedInUserRole = await this.storage.get('userRole');
-    console.log('Role recuperada:', this.loggedInUserRole); // Verificação de log
   }
 
   goToEditProfile(email: string) {
@@ -68,10 +67,6 @@ export class EmployeeAccountsPage implements OnInit {
     });
   }
 
-  addEmployee() {
-    console.log('Add new employee');
-  }
-
   getIconForEmployee(role: string): string {
     // Aqui você pode mapear os papéis para ícones específicos
     switch (role) {
@@ -103,8 +98,6 @@ export class EmployeeAccountsPage implements OnInit {
   }
 
   goToCadaster() {
-    console.log('clique');
-
     this.router.navigate(['/cadastro']);
   }
 }

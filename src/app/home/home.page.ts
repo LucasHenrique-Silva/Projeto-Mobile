@@ -45,7 +45,6 @@ export class HomePage {
   async checkToken() {
     try {
       const token = await this.storage.get('token'); // Verifica o token
-      console.log(token);
 
       // Se não houver token, redireciona para a página de login
       if (!token) {
@@ -64,7 +63,6 @@ export class HomePage {
   // Obtém o role do usuário logado do localStorage (ou de onde está armazenado)
   async getLoggedInUserRole() {
     this.loggedInUserRole = await this.storage.get('userRole');
-    console.log('Role recuperada:', this.loggedInUserRole); // Verificação de log
   }
 
   refreshData() {
@@ -188,7 +186,6 @@ export class HomePage {
     localStorage.removeItem('email');
     localStorage.removeItem('role');
     this.router.navigate(['/login']);
-    console.log('Ação 2 executada: usuário deslogado.');
   }
 
   startAutoRefresh() {
