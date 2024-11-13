@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Employee Accounts</ion-title>
+    <ion-title>Funcionarios</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="goToCadaster()" *ngIf="loggedInUserRole === 'admin'">
         <ion-icon
@@ -38,7 +38,7 @@
     slot="fixed"
   >
     <ion-fab-button (click)="goToCadaster()">
-      <ion-icon name="add"></ion-icon>
+      <ion-icon name="add" *ngIf="loggedInUserRole === 'admin'"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

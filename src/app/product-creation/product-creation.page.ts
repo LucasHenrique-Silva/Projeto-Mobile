@@ -66,11 +66,11 @@ export class ProductCreationPage {
       async (response) => {
         await loading.dismiss();
         // Exibe o alerta de sucesso
-        await this.showAlert('Success', 'Product created successfully!');
+        await this.showAlert('Sucesso', 'Produto criado com sucesso!');
       },
       async (error) => {
         await loading.dismiss();
-        await this.showAlert('Error', 'Failed to create product.');
+        await this.showAlert('Error', 'Falha ao criar produto.');
       }
     );
   }

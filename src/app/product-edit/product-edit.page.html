@@ -6,7 +6,7 @@
         icon="chevron-back-outline"
       ></ion-back-button>
     </ion-buttons>
-    <ion-title class="custom-title">Criar Produto</ion-title>
+    <ion-title class="custom-title">Editar Produto</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,7 +15,7 @@
     <ion-list>
       <!-- Name -->
       <ion-item class="form-item" [class.invalid]="isFieldInvalid('name')">
-        <ion-label position="stacked">Name</ion-label>
+        <ion-label position="stacked">Nome</ion-label>
         <ion-input
           type="text"
           formControlName="name"
@@ -28,7 +28,7 @@
 
       <!-- Quantity -->
       <ion-item class="form-item" [class.invalid]="isFieldInvalid('quantity')">
-        <ion-label position="stacked">Quantity</ion-label>
+        <ion-label position="stacked">Quantidade</ion-label>
         <ion-input
           type="number"
           formControlName="quantity"
@@ -41,10 +41,10 @@
 
       <!-- Type -->
       <ion-item [class.invalid]="isFieldInvalid('type')">
-        <ion-label position="stacked">Type</ion-label>
+        <ion-label position="stacked">Tipo</ion-label>
         <ion-select
           formControlName="type"
-          placeholder="Electronics"
+          placeholder="Electronico"
           [interfaceOptions]="customAlertOptions"
         >
           <ion-select-option value="eletronico">Eletronico</ion-select-option>
@@ -60,7 +60,7 @@
 
       <!-- Purchase Price -->
       <ion-item class="form-item" [class.invalid]="isFieldInvalid('buy_price')">
-        <ion-label position="stacked">Purchase Price</ion-label>
+        <ion-label position="stacked">Preço de compra</ion-label>
         <ion-input
           type="number"
           formControlName="buy_price"
@@ -76,7 +76,7 @@
         class="form-item"
         [class.invalid]="isFieldInvalid('sell_price') || isSellPriceInvalid()"
       >
-        <ion-label position="stacked">Sale Price</ion-label>
+        <ion-label position="stacked">Preço de venda</ion-label>
         <ion-input
           type="number"
           formControlName="sell_price"
@@ -92,7 +92,7 @@
         class="form-item"
         [class.invalid]="isFieldInvalid('where_stored')"
       >
-        <ion-label position="stacked">Location</ion-label>
+        <ion-label position="stacked">Localização</ion-label>
         <ion-input
           type="text"
           formControlName="where_stored"

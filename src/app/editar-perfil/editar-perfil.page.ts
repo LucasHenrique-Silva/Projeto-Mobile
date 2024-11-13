@@ -173,7 +173,7 @@ export class EditarPerfilPage implements OnInit {
 
       const successAlert = await this.alertController.create({
         header: 'Conta Deletada',
-        message: 'Sua conta foi deletada com sucesso!',
+        message: 'A conta foi deletada com sucesso!',
         buttons: [
           {
             text: 'OK',

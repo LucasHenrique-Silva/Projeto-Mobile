@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="light">
-    <ion-title>Product List</ion-title>
+    <ion-title>Produtos</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="openSearch()">
         <ion-icon slot="icon-only" name="search-outline"></ion-icon>
@@ -11,7 +11,7 @@
   <ion-searchbar
     [(ngModel)]="searchQuery"
     *ngIf="isSearchOpen"
-    placeholder="Search products..."
+    placeholder="Buscar produto..."
     (ionInput)="filterProducts()"
   ></ion-searchbar>
 </ion-header>
@@ -26,42 +26,42 @@
         <ion-button
           [color]="selectedFilter === '' ? 'primary' : 'light'"
           (click)="selectFilter('')"
-          >Padrao</ion-button
+          >Padrão</ion-button
         >
       </ion-col>
       <ion-col size="" size-sm="">
         <ion-button
           [color]="selectedFilter === 'quantity' ? 'primary' : 'light'"
           (click)="selectFilter('quantity')"
-          >Quantity</ion-button
+          >Quantidade</ion-button
         >
       </ion-col>
       <ion-col size="" size-sm="">
         <ion-button
           [color]="selectedFilter === 'type' ? 'primary' : 'light'"
           (click)="selectFilter('type')"
-          >Type</ion-button
+          >Tipo</ion-button
         >
       </ion-col>
       <ion-col size="" size-sm="">
         <ion-button
           [color]="selectedFilter === 'buy_price' ? 'primary' : 'light'"
           (click)="selectFilter('buy_price')"
-          >Buy Price</ion-button
+          >Preço de compra</ion-button
         >
       </ion-col>
       <ion-col size="" size-sm="">
         <ion-button
           [color]="selectedFilter === 'sell_price' ? 'primary' : 'light'"
           (click)="selectFilter('sell_price')"
-          >Sell Price</ion-button
+          >Preco de venda</ion-button
         >
       </ion-col>
       <ion-col size="" size-sm="">
         <ion-button
           [color]="selectedFilter === 'where_stored' ? 'primary' : 'light'"
           (click)="selectFilter('where_stored')"
-          >Location</ion-button
+          >Localização</ion-button
         >
       </ion-col>
     </ion-row>
@@ -71,7 +71,7 @@
   <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterProducts()">
     <div class="scrollable-buttons">
       <ion-segment-button (click)="loadProducts()" value="all"
-        >All</ion-segment-button
+        >Todos</ion-segment-button
       >
       <ion-segment-button value="eletronico">Eletronico</ion-segment-button>
       <ion-segment-button value="mobilia">Mobilia</ion-segment-button>
@@ -91,8 +91,8 @@
       <ion-icon [name]="getIcon(product.type)" slot="start"></ion-icon>
       <ion-label>
         <h2>{{ product.name }}</h2>
-        <p>Quantity: {{ product.quantity }}</p>
-        <p>Type: {{ product.type }}</p>
+        <p>Quantidade: {{ product.quantity }}</p>
+        <p>Tipo: {{ product.type }}</p>
 
         <!-- Exibe mais informações quando o produto está expandido -->
         <div *ngIf="expandedProduct === product">
@@ -130,7 +130,12 @@
   </ion-button>
 
   <!-- Botão de adicionar produto -->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    *ngIf="loggedInUserRole !== 'caixa'"
+  >
     <ion-fab-button color="primary" (click)="addProduct()">
       <ion-icon class="icon-add" name="add-outline"></ion-icon>
     </ion-fab-button>
